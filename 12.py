@@ -4,6 +4,7 @@ data = open('./in/12.txt').readlines()
 
 DIRNS = 'ESWN'
 
+
 def p1():
     dx = 0
     dy = 0
@@ -12,16 +13,18 @@ def p1():
     def N(n):
         nonlocal dx, dy
         dy += n
+
     def S(n):
         nonlocal dx, dy
         dy -= n
+
     def E(n):
         nonlocal dx, dy
         dx += n
+
     def W(n):
         nonlocal dx, dy
         dx -= n
-    
 
     for dirn, *dist in data:
         dist = int("".join(dist))
@@ -35,7 +38,7 @@ def p1():
             deg = dist // 90
             facing += deg
             facing %= 4
-        else: #F
+        else:  #F
             eval(f'{DIRNS[facing]}({dist})')
     dx = abs(dx)
     dy = abs(dy)
@@ -52,30 +55,36 @@ def p2():
     def N(n):
         nonlocal wx, wy, dx, dy
         wy += n
+
     def S(n):
         nonlocal wx, wy, dx, dy
         wy -= n
+
     def E(n):
         nonlocal wx, wy, dx, dy
         wx += n
+
     def W(n):
         nonlocal wx, wy, dx, dy
         wx -= n
+
     def R(k):
         nonlocal wx, wy, dx, dy
         wx, wy = wy, -wx
         if k > 1:
             R(k - 1)
+
     def L(k):
         nonlocal wx, wy, dx, dy
         wx, wy = -wy, wx
         if k > 1:
-            L(k -1)
+            L(k - 1)
+
     def F(n):
         nonlocal wx, wy, dx, dy
         dx += wx * n
         dy += wy * n
-    
+
     for dirn, *dist in data:
         dist = int("".join(dist))
         if dirn not in 'LR':
@@ -86,7 +95,7 @@ def p2():
     dy = abs(dy)
     print(dx, dy, dx + dy)
     return dx + dy
-    
+
 
 p1()
 p2()
