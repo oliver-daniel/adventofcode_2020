@@ -24,8 +24,6 @@ def p1():
                 return ret
         return None
 
-    dfs(0)
-
 
 def p2():
     import functools
