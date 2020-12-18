@@ -16,63 +16,42 @@ def outer_brackets(s):
                 stack.pop()
     return ret
 
-def parse1(expr):
+def parse(expr, priority_ops = ['*', '+']):
     subexprs = outer_brackets(expr)
     for sbx in subexprs:
-        expr = expr.replace(sbx, parse1(sbx[1:-1]))
-
-    #print('Evaluating', expr, end = " ")
+        expr = expr.replace(sbx, str(parse(sbx[1:-1], priority_ops)))
 
     tokens = expr.split(" ")
 
     stack = []
     for c in tokens:
-        if c.isdigit() and len(stack) >= 2 and type(stack[-1]) is str: 
-            op = stack.pop()
-            arg2 = int(stack.pop())
-            new = str(eval(f'{int(c)} {op} {arg2}'))
-            stack.append(new)
-        else: 
-            stack.append(c)
-    #print("=", stack[0])
-    return stack[0]
-
-def parse2(expr):
-    subexprs = outer_brackets(expr)
-    for sbx in subexprs:
-        expr = expr.replace(sbx, parse2(sbx[1:-1]))
-
-    #print('Evaluating', expr, end = " ")
-
-    tokens = expr.split(" ")
-
-    stack = []
-    for c in tokens:
-        if c.isdigit() and len(stack) >= 2 and stack[-1] == "+": 
+        if c.isdigit() and len(stack) >= 2 and stack[-1] in priority_ops:
             op = stack.pop()
             arg2 = int(stack.pop())
             new = str(eval(f'{int(c)} {op} {arg2}'))
             stack.append(new)             
         else: 
             stack.append(c)
-    k = str(math.prod(int(x) for x in stack if x.isdigit()))
-    #print("=", k)
+    
+
+    k = int(stack.pop())
+    while len(stack) > 0:
+        op = stack.pop()
+        arg2 = stack.pop()
+        to_eval = f'{k} {op} {arg2}'
+        k = eval(f'{k} {op} {arg2}')
+
     return k
-                
-            
+
 def p1():
-    t = 0
-    for ln in N:
-        t += int(parse1(ln))
+    t = sum(parse(ln) for ln in N)
     print(t)
     return t
 
 def p2():
-    t = 0
-    for ln in N:
-        t += int(parse2(ln))
+    t = sum(parse(ln, priority_ops=["+"]) for ln in N)
     print(t)
-    return t
+    return t              
 
 p1()
 print('------')
