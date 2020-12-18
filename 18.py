@@ -1,6 +1,3 @@
-import math
-N = ["((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2"]
-
 N = list(map(str.strip, open('./in/18.txt').readlines()))
 
 SYMBOLS = {'+': '__add__', '*': '__mul__'}
@@ -13,10 +10,9 @@ def outer_brackets(s):
         if c == "(":
             stack.append(i)
         elif c == ")":
-            if len(stack) == 1:
-                ret.append(s[stack.pop():i + 1])
-            else:
-                stack.pop()
+            p = stack.pop()
+            if len(stack) == 0:
+                ret.append(s[p:i + 1])
     return ret
 
 
