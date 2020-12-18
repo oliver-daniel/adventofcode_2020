@@ -3,6 +3,11 @@ N = ["((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2"]
 
 N = list(map(str.strip, open('./in/18.txt').readlines()))
 
+SYMBOLS = {
+                '+': '__add__',
+                '*': '__mul__'
+            }
+
 def outer_brackets(s):
     ret = []
     stack = []
@@ -28,7 +33,7 @@ def parse(expr, priority_ops = ['*', '+']):
         if c.isdigit() and len(stack) >= 2 and stack[-1] in priority_ops:
             op = stack.pop()
             arg2 = int(stack.pop())
-            new = str(eval(f'{int(c)} {op} {arg2}'))
+            new = getattr(int(c), SYMBOLS[op])(arg2)
             stack.append(new)             
         else: 
             stack.append(c)
@@ -37,9 +42,8 @@ def parse(expr, priority_ops = ['*', '+']):
     k = int(stack.pop())
     while len(stack) > 0:
         op = stack.pop()
-        arg2 = stack.pop()
-        to_eval = f'{k} {op} {arg2}'
-        k = eval(f'{k} {op} {arg2}')
+        arg2 = int(stack.pop())
+        k = getattr(k, SYMBOLS[op])(arg2)
 
     return k
 
