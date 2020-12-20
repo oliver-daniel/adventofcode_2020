@@ -32,7 +32,7 @@ def parse(expr, priority_ops=['*', '+']):
 
     stack = []
     for c in tokens:
-        if c.isdigit() and len(stack) >= 2 and stack[-1] in priority_ops:
+        if len(stack) >= 2 and stack[-1] in priority_ops:
             new = evaluate(c, stack.pop(), stack.pop())
             stack.append(new)
         else:
