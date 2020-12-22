@@ -29,7 +29,7 @@ for ings, ntcs in zip(lists, notices):
             if len(allergens[allergen]) > 0:
                 allergens[allergen] &= ings
             else:
-                allergens[allergen] |= ings
+                allergens[allergen] = ings.copy()
 
 
 while not all(len(val) == 1 for val in allergens.values()):

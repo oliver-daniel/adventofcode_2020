@@ -1,15 +1,7 @@
 import constraint
 from math import prod
-N="""1721
-979
-366
-299
-675
-1456"""
 
-N = open("./in/1.txt").readlines()
-
-N = [int(x) for x in N]
+N = list(map(int, open("./in/1.txt").readlines()))
 
 def p(n):
     p = constraint.Problem()

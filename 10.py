@@ -23,6 +23,7 @@ def p1():
             elif (ret := dfs(child, path, j1, j3)):
                 return ret
         return None
+    dfs(0)
 
 
 def p2():
