@@ -57,11 +57,11 @@ def crawl(a, b, game=1):
     
     #i = 1
     while a and b:
-        tpls = (tuple(a), tuple(b))
-        if tpls in cache[game]:
+        if tuple(a) in cache[game] and tuple(b) in cache[game]:
             #print('Early return')
             return 1
-        cache[game].add(tpls)
+        cache[game].add(tuple(a))
+        cache[game].add(tuple(b))
         c1 = a.popleft()
         c2 = b.popleft()
         assert c1 != c2
