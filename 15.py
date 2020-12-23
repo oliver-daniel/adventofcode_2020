@@ -1,3 +1,4 @@
+from tqdm.auto import tqdm
 N = "13,16,0,12,15,1"
 
 N = [int(x) for x in N.split(',')]
@@ -6,7 +7,7 @@ _N = len(N)
 def p1():
     seen = {n: _N - i for i, n in enumerate(N, start=1)}
     curr = N[-1]
-    for i in range(_N, 2020): #2020
+    for i in tqdm(range(_N, 2020)): #2020
         val = seen.get(curr, 0)
 
         # update seen
@@ -22,7 +23,7 @@ def p2():
     seen = {n: [i] for i, n in enumerate(N, start=1)}
     curr = N[-1]
     nxt_ = -1
-    for i in range(_N + 1, 30_000_000 + 1): #30_000_000
+    for i in tqdm(range(_N + 1, 30_000_000 + 1), total=30_000_000): #30_000_000
         #print(f'Turn {i}. ', end="")
         #print(i)
         val = seen.get(curr, 0)

@@ -46,7 +46,7 @@ def p2():
 
 
     curr = N[0]
-    for _ in tqdm(range(10_000_000)):
+    for _ in tqdm(range(10_000_000), leave=False):
         curr = move(cups, curr, 1_000_000)
     a = cups[1]
     b = cups[a]

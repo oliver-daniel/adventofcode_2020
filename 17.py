@@ -1,4 +1,5 @@
 import itertools
+from tqdm.auto import tqdm
 
 N = """.#.
 ..#
@@ -56,7 +57,7 @@ def p1():
 
 
     curr = board
-    for i in range(6):
+    for i in tqdm(range(6)):
         curr = transition(curr, neighbours_1)
     
     print(sum(sum(sum(row) for row in plane) for plane in curr))
@@ -107,7 +108,7 @@ def p2():
 
 
     curr = board
-    for i in range(6):
+    for i in tqdm(range(6)):
         curr = transition(curr, neighbours_2)
     
     print(sum(sum(sum(sum(row) for row in plane) for plane in space) for space in curr))

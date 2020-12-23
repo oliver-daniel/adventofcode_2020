@@ -1,5 +1,6 @@
 from functools import cache
 from itertools import product
+from tqdm.auto import tqdm
 
 N, data = open('./in/19.txt').read().split('\n\n')
 
@@ -68,8 +69,12 @@ def p1():
 
 def p2():
     X = [x.strip() for x in data.split('\n')]
+    
+    ret = []
+    for x in tqdm(X, leave=False):
+        if crawl(x, 0, True):
+            ret.append(x)
 
-    ret = [x for x in X if crawl(x, 0, True)]
     print(len(ret))
     return len(ret)
 

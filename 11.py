@@ -1,4 +1,5 @@
 import itertools
+from tqdm.auto import tqdm
 
 N_ = list(map(str.strip, open('./in/11.txt').readlines()))
 H = len(N_)
@@ -37,7 +38,7 @@ def transition(curr, neighbours, tolerance=4):
 
 def p1():
     curr = N_
-    for i in itertools.count():
+    for i in tqdm(itertools.count(), total=85, leave=False):
         changed, curr = transition(curr, adjacent_neighbors)
         if not changed:
             k = sum(row.count("#") for row in curr)
@@ -65,7 +66,7 @@ def visible_neighbors(N, row, col):
 
 def p2():
     curr = N_
-    for i in itertools.count():
+    for i in tqdm(itertools.count(), total=82, leave=False):
         changed, curr = transition(curr, visible_neighbors, tolerance=5)
         if not changed:
             k = sum(row.count("#") for row in curr)

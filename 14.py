@@ -43,7 +43,7 @@ def p2():
     def set_masks(mask):
         MASKS.clear()
         X = mask.count('X')
-        for p in itertools.product(*['Z1']*X):
+        for p in itertools.product('Z1', repeat=X):
             new_mask = mask[:]
             for c in p:
                 new_mask = new_mask.replace('X', c, 1)
