@@ -1,27 +1,6 @@
 import itertools as it
 from tqdm.auto import tqdm
 
-N = """sesenwnenenewseeswwswswwnenewsewsw
-neeenesenwnwwswnenewnwwsewnenwseswesw
-seswneswswsenwwnwse
-nwnwneseeswswnenewneswwnewseswneseene
-swweswneswnenwsewnwneneseenw
-eesenwseswswnenwswnwnwsewwnwsene
-sewnenenenesenwsewnenwwwse
-wenwwweseeeweswwwnwwe
-wsweesenenewnwwnwsenewsenwwsesesenwne
-neeswseenwwswnwswswnw
-nenwswwsewswnenenewsenwsenwnesesenew
-enewnwewneswsewnwswenweswnenwsenwsw
-sweneswneswneneenwnewenewwneswswnese
-swwesenesewenwneswnwwneseswwne
-enesenwswwswneneswsenwnewswseenwsese
-wnwnesenesenenwwnenwsewesewsesesew
-nenewswnwewswnenesenwnesewesw
-eneswnwswnwsenenwnwnwwseeswneewsenese
-neswnwewnwnwseenwseesewsenwsweewe
-wseweeenwnesenwwwswnew""".split('\n')
-
 N = open('./in/24.txt').readlines()
 
 LOOKUP = {
@@ -35,7 +14,6 @@ LOOKUP = {
 
 
 def to_coords(dirs):
-    _l = len(dirs)
     dx, dy = 0, 0
 
     cts = {x: dirs.count(x) for x in LOOKUP}
@@ -92,8 +70,6 @@ def p2():
         tiles = transition(tiles)
 
     k = sum(tiles.values())
-
-    xs, ys = map(list, zip(*(t for t in tiles.keys() if tiles[t])))
 
     print(k)
     return k
