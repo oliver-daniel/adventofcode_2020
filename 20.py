@@ -1,6 +1,5 @@
 import itertools
 from constraint import *
-from functools import cache, cached_property
 import copy
 from math import prod
 
